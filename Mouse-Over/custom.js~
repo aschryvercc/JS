@@ -1,0 +1,13 @@
+$(document).ready( function() {
+	$("a").hover(function(e) {
+		var tooltip = $(this).data("tooltip");
+    		$(tooltip).css({
+        		left: e.pageX + 1,
+        		top: e.pageY + 1
+    		});
+		$(tooltip).stop().show(100);
+	}, function() {
+    		var tooltip = $(this).data("tooltip");
+   		$(tooltip).hide();
+	});
+});

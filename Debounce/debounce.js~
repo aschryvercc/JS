@@ -1,0 +1,50 @@
+/*
+ * Name:	debounce
+ * Returns:	debounce function to be added to an event's listeners.
+ * Parameters:	
+ * 	func - Function being invoked.
+ * 	wait - Delay the invoked function 'n' ms
+ * 	immediate - Trigger the function on the leading edge.
+ * Description: This function delays the rate a function if invoked;
+ * 		preventing issues in performance when invoking a 
+ * 		heavy task.
+ */
+function debounce(func, wait, immediate) {
+	var timeout;	// setTimeout; will wait 'n' ms to invoke task.
+	
+	/*
+	 * Perform the debounce.
+	 */
+	return function() {
+
+		var context = this;	// Context of the call.
+		var args = arguments;	// Arguments of the function being invoked.
+		var later = function() {	// Function to be invoked later.
+
+			timeout = null;	
+			/*
+			 * Call function on the falling edge.
+			 */		
+			if (!immediate) {
+
+				func.apply(context, args);
+			}
+		};	
+		var callNow = immediate && !timeout;	// Boolean if time is up.
+		/*
+		 * clear the timer.
+		 */
+		clearTimeout(timeout);
+		/*
+		 * Set the timer to wait 'n' ms.
+		 */
+		timeout = setTimeout(later, wait);
+		/*
+		 * If time is up, invoke function.
+		 */
+		if (callNow) {
+			
+			func.apply(context, args);
+		}
+	};
+};

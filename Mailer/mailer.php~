@@ -1,0 +1,10 @@
+<?php
+if($_POST) {
+	$to = $_POST('to');
+	$from = $_POST('from');
+	$subject = $_POST('subject');
+	$message = $_POST('message');
+
+	mail($to, $subject, $message, $from);
+}
+>
